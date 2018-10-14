@@ -1,7 +1,7 @@
 '''
 '''
 
-from .move import DrawException
+from .move import Move, DrawException
 from .player import Player
 from itertools import combinations
 
@@ -83,6 +83,14 @@ class Round:
 
     
 class Game:
+
+
+    @classmethod
+    def default_moves(cls):
+        try:
+            return Move.moveFactory(cls._rules)
+        except AttributeError as e:
+            raise AttributeError("missing class attribute '_moves'")
     
     @classmethod
     def playerVsComputer(cls, playername, n_rounds=3, moves=None):
@@ -91,11 +99,8 @@ class Game:
         :param n_rounds:   optional integer
         :param moves:      optional list of Moves
         '''
-        try:
-            moves = moves or cls._moves
-        except AttributeError as e:
-            raise AttributeError("missing class attribute '_moves'")
-            
+
+        moves = moves or cls.default_moves()
         players = [Player(playername), Player('computer', robot=True)]
         return cls(players, moves, n_rounds)
 
@@ -106,10 +111,7 @@ class Game:
         :param n_rounds: optional integer
         :param moves:    optional list of Moves
         '''
-        try:
-            moves = moves or cls._moves
-        except AttributeError as e:
-            raise AttributeError("missing class attribute '_moves'")
+        moves = moves or cls.default_moves()
         players = [Player(f'computer-{i}', robot=True) for i in range(0,n_robots)]
         return cls(players, moves, n_rounds)
 
