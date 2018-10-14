@@ -1,7 +1,7 @@
 
 import random
 
-class Player_cjc:
+class Player:
 
     def __init__(self, name, auto):
         self.name = name
@@ -17,7 +17,7 @@ class Player_cjc:
             return cmd
 
 
-def game_cjc(player1, player2, rounds):
+def game(player1, player2, rounds):
     for round in range(rounds):
         print('Round {} of {}!'.format(round + 1, rounds))
         move1 = player1.make_move()
@@ -54,6 +54,6 @@ def game_cjc(player1, player2, rounds):
 
 
 def cjc_doit():
-    player1 = Player_cjc('Connor', False)
-    player2 = Player_cjc('Computer', True)
-    game_cjc(player1, player2, 7)
+    player1 = Player('Connor', False)
+    player2 = Player('Computer', True)
+    game(player1, player2, 7)
