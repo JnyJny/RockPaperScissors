@@ -2,7 +2,7 @@
 
 from rock_paper_scissors import RockPaperScissors as RPS
 
-from argpase import ArgumentParser
+from argparse import ArgumentParser
 
 def main():
     parser = ArgumentParser()
@@ -11,8 +11,8 @@ def main():
 
     args = parser.parse_args()
 
-    if args.playerName:
-        game = RPS.playersVsComputer(args.playerName)
+    if args.player:
+        game = RPS.playersVsComputer(args.player)
     else:
         game = RPS.computerVsComputer()
 
